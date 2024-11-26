@@ -1,33 +1,3 @@
-# ✨ So you want to run an audit
-
-This `README.md` contains a set of checklists for our audit collaboration.
-
-Your audit will use two repos: 
-- **an _audit_ repo** (this one), which is used for scoping your audit and for providing information to wardens
-- **a _findings_ repo**, where issues are submitted (shared with you after the audit) 
-
-Ultimately, when we launch the audit, this repo will be made public and will contain the smart contracts to be reviewed and all the information needed for audit participants. The findings repo will be made public after the audit report is published and your team has mitigated the identified issues.
-
-Some of the checklists in this doc are for **C4 (🐺)** and some of them are for **you as the audit sponsor (⭐️)**.
-
----
-
-# Audit setup
-
-## 🐺 C4: Set up repos
-- [ ] Create a new private repo named `YYYY-MM-sponsorname` using this repo as a template.
-- [ ] Rename this repo to reflect audit date (if applicable)
-- [ ] Rename audit H1 below
-- [ ] Update pot sizes
-  - [ ] Remove the "Bot race findings opt out" section if there's no bot race.
-- [ ] Fill in start and end times in audit bullets below
-- [ ] Add link to submission form in audit details below
-- [ ] Add the information from the scoping form to the "Scoping Details" section at the bottom of this readme.
-- [ ] Add matching info to the Code4rena site
-- [ ] Add sponsor to this private repo with 'maintain' level access.
-- [ ] Send the sponsor contact the url for this repo to follow the instructions below and add contracts here. 
-- [ ] Delete this checklist.
-
 # Repo setup
 
 ## ⭐️ Sponsor: Add code to this repo
@@ -54,19 +24,16 @@ Some of the checklists in this doc are for **C4 (🐺)** and some of them are fo
 ---
 
 # MANTRA audit details
-- Total Prize Pool: $100000 in USDC
-  - HM awards: $79700 in USDC
-  - (remove this line if there is no Analysis pool) Analysis awards: XXX XXX USDC (Notion: Analysis pool)
-  - QA awards: $3300 in USDC
-  - (remove this line if there is no Bot race) Bot Race awards: XXX XXX USDC (Notion: Bot Race pool)
+- Total Prize Pool: $60,000 in USDC
+  - HM awards: $47,800 in USDC
+  - QA awards: $2,000 in USDC
  
-  - Judge awards: $9900 in USDC
-  - Validator awards: XXX XXX USDC (Notion: Triage fee - final)
+  - Judge awards: $5,800 in USDC
+  - Validator awards: $3,900 in USDC
   - Scout awards: $500 in USDC
-  - (this line can be removed if there is no mitigation) Mitigation Review: XXX XXX USDC (*Opportunity goes to top 3 backstage wardens based on placement in this audit who RSVP.*)
 - [Read our guidelines for more details](https://docs.code4rena.com/roles/wardens)
-- Starts November 21, 2024 20:00 UTC
-- Ends December 16, 2024 20:00 UTC
+- Starts November 27, 2024 20:00 UTC
+- Ends January 6, 2025 20:00 UTC
 
 **Note re: risk level upgrades/downgrades**
 
@@ -76,30 +43,243 @@ Two important notes about judging phase risk adjustments:
 
 As such, wardens are encouraged to select the appropriate risk level carefully during the submission phase.
 
-## This is a Private audit
-
-This audit repo and its Discord channel are accessible to **certified wardens only.** Participation in private audits is bound by:
-
-1. Code4rena's [Certified Contributor Terms and Conditions](https://github.com/code-423n4/code423n4.com/blob/main/_data/pages/certified-contributor-terms-and-conditions.md)
-2. C4's [Certified Contributor Code of Professional Conduct](https://code4rena.notion.site/Code-of-Professional-Conduct-657c7d80d34045f19eee510ae06fef55)
-
-*All discussions regarding private audits should be considered private and confidential, unless otherwise indicated.*
-
-Please review the following confidentiality requirements carefully, and if anything is unclear, ask questions in the private audit channel in the C4 Discord.
-
->>DRAG IN CLASSIFIED IMAGE HERE
-
 ## Automated Findings / Publicly Known Issues
 
 The 4naly3er report can be found [here](https://github.com/code-423n4/2024-11-mantra/blob/main/4naly3er-report.md).
 
-
-
 _Note for C4 wardens: Anything included in this `Automated Findings / Publicly Known Issues` section is considered a publicly known issue and is ineligible for awards._
+
 ## 🐺 C4: Begin Gist paste here (and delete this line)
 
+- [Pool Manager] Since the pool creation and the initial liquidity provision are two separate actions, an attacker might attempt to front-run the first liquidity provider in order to set an unfavorable price and take advantage of immediate arbitrage. This is handled by multiple messages being passed in the same tx. If a user creating a pool is concerned by front-running then they should send create and provide liquidity messages in the same transaction. We will consider adding this functionality in the contract in the future.
+
+- [Farm Manager] Since the number of farms that can be created for a given LP denom is limited, the farm creation can be blocked if an attacker creates the maximum allowed number, preventing legitimate farm creators from creating meaningful farms. This is not a concern since the farm creation fee is set relatively high, making it unfeasible for someone to perform such an attack. Additionally, the contract owner has the ability to close spam farms if necessary.
+
+- [Farm Manager] Minimal farm assets amount does not respect different
+currencies. The MIN_FARM_AMOUNT constant does not take into account different coins with varying monetary value, despite farms can use different denominations for rewards. The constant was essentially chosen to prevent creating farms with dust rewards. However, considering the farm creation fee is relatively high, that issue is mitigated. To make the MIN_FARM_AMOUNT value dynamic a solution involving oracles must be adopted, which is not in place at the moment.
+
+- [Farm Manager] Magic numbers used when calculating weights. These numbers were calculated using a polynomial. Will potentially be cleaned up in a future iteration. 
+
+- [Farm Manager] Users can potentially lose farm rewards if they don't claim before the farm expires. The farm expires at least 1 month after the reward distribution finishes. 
+
+- [Epoch Manager] The contract owner can alter the epoch configuration, which could change the epoch values derived by the contract when querying the current epoch value, which is used when calculating farm rewards. Although this is possible, it is not intended to happen once the contract is instantiated and the genesis epoch starts.
+
+- [Fee Collector] The fee collector contract doesn't have any functionality as of yet besides collecting fees generated by the protocol. The contract will be migrated once there's a use for those fees.
+
+- Overflow checks not enabled for release profile for individual contracts. It is however enabled at workspace level.
+
+✅ SCOUTS: Please format the response above 👆 so its not a wall of text and its readable.
+
+# Overview
+
+[ ⭐️ SPONSORS: add info here ]
+
+## Links
+
+- **Previous audits:**  The previous audit report is ready but hasn't been published yet. It will be added to this repo ASAP.
+- **Documentation:** https://docs.mantrachain.io/mantra-smart-contracts/mantra_dex
+- **Website:** https://www.mantrachain.io/
+- **X:** https://twitter.com/MANTRA_Chain
+
+---
+
+# Scope
+
+[ ✅ SCOUTS: add scoping and technical details here ]
+
+### Files in scope
+- ✅ This should be completed using the `metrics.md` file
+- ✅ Last row of the table should be Total: SLOC
+- ✅ SCOUTS: Have the sponsor review and and confirm in text the details in the section titled "Scoping Q amp; A"
+
+*For sponsors that don't use the scoping tool: list all files in scope in the table below (along with hyperlinks) -- and feel free to add notes to emphasize areas of focus.*
+
+| Contract | SLOC | Purpose | Libraries used |  
+| ----------- | ----------- | ----------- | ----------- |
+| [contracts/folder/sample.sol](https://github.com/code-423n4/repo-name/blob/contracts/folder/sample.sol) | 123 | This contract does XYZ | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
+
+### Files out of scope
+✅ SCOUTS: List files/directories out of scope
+
+## Scoping Q &amp; A
+
+### General questions
+### Are there any ERC20's in scope?: No
+
+✅ SCOUTS: If the answer above 👆 is "Yes", please add the tokens below 👇 to the table. Otherwise, update the column with "None".
 
 
+### Are there any ERC777's in scope?: 
+
+✅ SCOUTS: If the answer above 👆 is "Yes", please add the tokens below 👇 to the table. Otherwise, update the column with "None".
+
+
+
+### Are there any ERC721's in scope?: No
+
+✅ SCOUTS: If the answer above 👆 is "Yes", please add the tokens below 👇 to the table. Otherwise, update the column with "None".
+
+
+
+### Are there any ERC1155's in scope?: No
+
+✅ SCOUTS: If the answer above 👆 is "Yes", please add the tokens below 👇 to the table. Otherwise, update the column with "None".
+
+
+
+✅ SCOUTS: Once done populating the table below, please remove all the Q/A data above.
+
+| Question                                | Answer                       |
+| --------------------------------------- | ---------------------------- |
+| ERC20 used by the protocol              |       🖊️             |
+| Test coverage                           | ✅ SCOUTS: Please populate this after running the test coverage command                          |
+| ERC721 used  by the protocol            |            🖊️              |
+| ERC777 used by the protocol             |           🖊️                |
+| ERC1155 used by the protocol            |              🖊️            |
+| Chains the protocol will be deployed on | OtherMANTRA Chain  |
+
+### ERC20 token behaviors in scope
+
+| Question                                                                                                                                                   | Answer |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| [Missing return values](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#missing-return-values)                                                      |    |
+| [Fee on transfer](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#fee-on-transfer)                                                                  |   |
+| [Balance changes outside of transfers](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#balance-modifications-outside-of-transfers-rebasingairdrops) |    |
+| [Upgradeability](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#upgradable-tokens)                                                                 |    |
+| [Flash minting](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#flash-mintable-tokens)                                                              |    |
+| [Pausability](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#pausable-tokens)                                                                      |    |
+| [Approval race protections](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#approval-race-protections)                                              |    |
+| [Revert on approval to zero address](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#revert-on-approval-to-zero-address)                            |    |
+| [Revert on zero value approvals](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#revert-on-zero-value-approvals)                                    |    |
+| [Revert on zero value transfers](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#revert-on-zero-value-transfers)                                    |    |
+| [Revert on transfer to the zero address](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#revert-on-transfer-to-the-zero-address)                    |    |
+| [Revert on large approvals and/or transfers](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#revert-on-large-approvals--transfers)                  |    |
+| [Doesn't revert on failure](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#no-revert-on-failure)                                                   |    |
+| [Multiple token addresses](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#revert-on-zero-value-transfers)                                          |    |
+| [Low decimals ( < 6)](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#low-decimals)                                                                 |    |
+| [High decimals ( > 18)](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#high-decimals)                                                              |    |
+| [Blocklists](https://github.com/d-xo/weird-erc20?tab=readme-ov-file#tokens-with-blocklists)                                                                |    |
+
+### External integrations (e.g., Uniswap) behavior in scope:
+
+
+| Question                                                  | Answer |
+| --------------------------------------------------------- | ------ |
+| Enabling/disabling fees (e.g. Blur disables/enables fees) | No   |
+| Pausability (e.g. Uniswap pool gets paused)               |  No   |
+| Upgradeability (e.g. Uniswap gets upgraded)               |   No  |
+
+
+### EIP compliance checklist
+N/A
+
+✅ SCOUTS: Please format the response above 👆 using the template below👇
+
+| Question                                | Answer                       |
+| --------------------------------------- | ---------------------------- |
+| src/Token.sol                           | ERC20, ERC721                |
+| src/NFT.sol                             | ERC721                       |
+
+
+# Additional context
+
+## Main invariants
+
+Main invariants:
+
+- Genesis epoch and epoch duration, not intended to changed once set up.
+- Pool fees to remain immutable once the pool is created.
+- Pool asset decimals to remain immutable once the pool is created.
+- Pool and Farm creation fee will always be a meaningful value, never set to zero.
+- The number of farms for a given LP denom is constant. 
+- The number of active and closed farm positions a user can have at any given time is finite.
+
+
+✅ SCOUTS: Please format the response above 👆 so its not a wall of text and its readable.
+
+## Attack ideas (where to focus for bugs)
+Areas of concern:
+
+On the Pool Manager:
+- Pool swaps and fees calculations with single and multihop operations.
+- Pool LP calculations.
+- Internal pool bookkeeping. Since the pool manager holds multiple pools, there's an internal pool ledger keeping track of what assets are in which pool. It is critical the balances are updated accurately liquidity is added/removed from pools.
+- Is it possible to extract value while creating pools by not paying the right fees, i.e. pool creation fee + token factory fee?
+- Potential flaw providing liquidity with a single asset?
+
+On the Farm Manager:
+- Farm reward calculation/claim logic.
+- Is it possible to maliciously extract funds from the farm manager?
+- Can people be locked from claiming pending rewards?
+- Can an attacker exploit creating farm positions on behalf of someone else via the pool manager?
+- Emergency penalty fee calculation and distribution among farm owners.
+
+Overall:
+
+- Pay attention to the code flows and try finding any flaws in the logic that could lead to unexpected behaviors or vulnerabilities in the contracts.
+- Approximation errors when handling very large amounts, especially with assets having 18 decimal places. Think of handling trillions of such assets.
+
+
+
+
+✅ SCOUTS: Please format the response above 👆 so its not a wall of text and its readable.
+
+## All trusted roles in the protocol
+
+While the protocol is permissionless, there are a few roles:
+
+- Contract owner: The only role that can update the existing configuration of the contract. This applies to all the contracts.
+- Farm owner: The owner of the farm. This role can at any point close the farm. This can also be done by the contract owner of the farm manager contract. Unclaimed funds are sent back to the farm owner.
+
+✅ SCOUTS: Please format the response above 👆 using the template below👇
+
+| Role                                | Description                       |
+| --------------------------------------- | ---------------------------- |
+| Owner                          | Has superpowers                |
+| Administrator                             | Can change fees                       |
+
+## Describe any novel or unique curve logic or mathematical models implemented in the contracts:
+
+Standard xyk AMM model for constant product pools. 
+The curve model for stable pools with 32 Newton iterations instead of 256.
+
+✅ SCOUTS: Please format the response above 👆 so its not a wall of text and its readable.
+
+## Running tests
+
+git clone https://github.com/MANTRA-Chain/mantra-dex
+cd mantra-dex
+cargo build
+cargo test
+just optimize
+
+✅ SCOUTS: Please format the response above 👆 using the template below👇
+
+```bash
+git clone https://github.com/code-423n4/2023-08-arbitrum
+git submodule update --init --recursive
+cd governance
+foundryup
+make install
+make build
+make sc-election-test
+```
+To run code coverage
+```bash
+make coverage
+```
+To run gas benchmarks
+```bash
+make gas
+```
+
+✅ SCOUTS: Add a screenshot of your terminal showing the gas report
+✅ SCOUTS: Add a screenshot of your terminal showing the test coverage
+
+## Miscellaneous
+Employees of MANTRA and employees' family members are ineligible to participate in this audit.
+
+Code4rena's rules cannot be overridden by the contents of this README. In case of doubt, please check with C4 staff.
 
 
 # Scope
