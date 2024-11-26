@@ -27,13 +27,12 @@
 - Total Prize Pool: $60,000 in USDC
   - HM awards: $47,800 in USDC
   - QA awards: $2,000 in USDC
- 
   - Judge awards: $5,800 in USDC
   - Validator awards: $3,900 in USDC
   - Scout awards: $500 in USDC
 - [Read our guidelines for more details](https://docs.code4rena.com/roles/wardens)
 - Starts November 27, 2024 20:00 UTC
-- Ends January 6, 2025 20:00 UTC
+- Ends January 13, 2025 20:00 UTC
 
 **Note re: risk level upgrades/downgrades**
 
