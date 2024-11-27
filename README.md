@@ -64,14 +64,15 @@ currencies. The MIN_FARM_AMOUNT constant does not take into account different co
 
 | File                                      |    nSLOC    | Purpose |
 |:----------------------------------------- |:-----------:|:-------:|
-| All files in `/contracts/epoch-manager/`  |    494      |         |
-| All files in `/contracts/farm-manager/`   |    10739    |         |
-| All files in `/contracts/fee-collector/`  |    138      |         |
-| All files in `/contracts/pool-manager/`   |    9435     |         |
-| All files in `/packages/amm/`             |    1115     |         |
-| All files in `/packages/common-testing/`  |    164      |         |
-| All files in `/packages/utils/`           |    36       |         |
-| All files in `/xtask/`                    |    147      |         |
+| All Rust files in [`/contracts/epoch-manager/`](https://github.com/code-423n4/2024-11-mantra-dex/tree/main/contracts/epoch-manager)  |    494      |         |
+| All Rust files in [`/contracts/farm-manager/`](https://github.com/code-423n4/2024-11-mantra-dex/tree/main/contracts/farm-manager)   |    10739    |         |
+| All Rust files in [`/contracts/fee-collector/`](https://github.com/code-423n4/2024-11-mantra-dex/tree/main/contracts/fee-collector)  |    138      |         |
+| All Rust files in [`/contracts/pool-manager/`](https://github.com/code-423n4/2024-11-mantra-dex/tree/main/contracts/pool-manager)   |    9435     |         |
+| All Rust files in [`/packages/amm/`](https://github.com/code-423n4/2024-11-mantra-dex/tree/main/packages/amm)             |    1115     |         |
+| All Rust files in [`/packages/common-testing/`](https://github.com/code-423n4/2024-11-mantra-dex/tree/main/packages/common-testing)  |    164      |         |
+| All Rust files in [`/packages/utils/`](https://github.com/code-423n4/2024-11-mantra-dex/tree/main/packages/utils)           |    36       |         |
+| All Rust files in [`/xtask/`](https://github.com/code-423n4/2024-11-mantra-dex/tree/main/xtask)                    |    147      |         |
+| **Totals**                                | **22268** |         |
 
 ### Files out of scope
 No files in this repo are out of scope.
