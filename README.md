@@ -46,11 +46,6 @@ currencies. The MIN_FARM_AMOUNT constant does not take into account different co
 
 # MANTRA DEX
 
-## Getting started
-
-To get started with MANTRA DEX, please go through the [contributing guide](./docs/CONTRIBUTING.md) to see the
-different ways to contribute to the project.
-
 ## Resources
 
 1. [Website](https://mantra.zone/)
@@ -62,6 +57,7 @@ MANTRA DEX is based on White Whale V2. The protocol is built around singleton co
 and integrate with other protocols.
 
 The following is the architecture of MANTRA DEX, and a general description of each contract:
+
 ![Mantra Mermaid](https://github.com/code-423n4/2024-11-mantra-dex/blob/main/mantramermaid.png?raw=true)
 
 
