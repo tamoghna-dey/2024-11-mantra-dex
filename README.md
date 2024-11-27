@@ -121,7 +121,7 @@ All recipes are found in the `justfile`. To see all available recipes, run `just
 
 ## Links
 
-- **Previous audits:**  The previous audit report is ready but hasn't been published yet. It will be added to this repo ASAP.
+- **Previous audits:**  The previous audit report is not public.
 - **Documentation:** https://docs.mantrachain.io/mantra-smart-contracts/mantra_dex
 - **Website:** https://www.mantrachain.io/
 - **X:** https://twitter.com/MANTRA_Chain
