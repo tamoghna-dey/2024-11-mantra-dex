@@ -89,7 +89,7 @@ Any files not in Scope are Out of Scope.
 | Question                                | Answer                       |
 | --------------------------------------- | ---------------------------- |
 | ERC20 used by the protocol              |       None            |
-| Test coverage                           | ✅ SCOUTS: Please populate this after running the test coverage command                          |
+| Test coverage                           | Contracts: 87.13% - Packages: 83.83%                          |
 | ERC721 used  by the protocol            |           None              |
 | ERC777 used by the protocol             |           None                |
 | ERC1155 used by the protocol            |              None           |
