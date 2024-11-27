@@ -62,24 +62,19 @@ currencies. The MIN_FARM_AMOUNT constant does not take into account different co
 
 ### Files in scope
 
-
-| File                                                                                                                                                       |  nSLOC  | Purpose |
-|:---------------------------------------------------------------------------------------------------------------------------------------------------------- |:-------:|:-------:|
-| [/contracts/farm-manager/src/manager/mod.rs](https://github.com/code-423n4/2024-11-mantra-dex/blob/main/contracts/farm-manager/src/manager/mod.rs)         |    1    |         |
-| [/contracts/fee-collector/src/state.rs](https://github.com/code-423n4/2024-11-mantra-dex/blob/main/contracts/fee-collector/src/state.rs)                   |  ****   |         |
-| [/contracts/pool-manager/sim/src/lib.rs](https://github.com/code-423n4/2024-11-mantra-dex/blob/main/contracts/pool-manager/sim/src/lib.rs)                 |   185   |         |
-| [/contracts/pool-manager/src/liquidity/mod.rs](https://github.com/code-423n4/2024-11-mantra-dex/blob/main/contracts/pool-manager/src/liquidity/mod.rs)     |    1    |         |
-| [/contracts/pool-manager/src/router/mod.rs](https://github.com/code-423n4/2024-11-mantra-dex/blob/main/contracts/pool-manager/src/router/mod.rs)           |    1    |         |
-| [/contracts/pool-manager/src/tests/mod.rs](https://github.com/code-423n4/2024-11-mantra-dex/blob/main/contracts/pool-manager/src/tests/mod.rs)             |    2    |         |
-| [/packages/amm/src/epoch_manager.rs](https://github.com/code-423n4/2024-11-mantra-dex/blob/main/packages/amm/src/epoch_manager.rs)                         |   82    |         |
-| [/packages/amm/src/tokenfactory/mod.rs](https://github.com/code-423n4/2024-11-mantra-dex/blob/main/packages/amm/src/tokenfactory/mod.rs)                   |    6    |         |
-| [/packages/common-testing/src/lib.rs](https://github.com/code-423n4/2024-11-mantra-dex/blob/main/packages/common-testing/src/lib.rs)                       |    1    |         |
-| [/packages/common-testing/src/multi_test/mod.rs](https://github.com/code-423n4/2024-11-mantra-dex/blob/main/packages/common-testing/src/multi_test/mod.rs) |    1    |         |
-| [/packages/utils/src/lib.rs](https://github.com/code-423n4/2024-11-mantra-dex/blob/main/packages/utils/src/lib.rs)                                         |    2    |         |
-| **Totals**                                                                                                                                                 | **282** |         |
+| File                                      |    nSLOC    | Purpose |
+|:----------------------------------------- |:-----------:|:-------:|
+| All files in `/contracts/epoch-manager/`  |    494      |         |
+| All files in `/contracts/farm-manager/`   |    10739    |         |
+| All files in `/contracts/fee-collector/`  |    138      |         |
+| All files in `/contracts/pool-manager/`   |    9435     |         |
+| All files in `/packages/amm/`             |    1115     |         |
+| All files in `/packages/common-testing/`  |    164      |         |
+| All files in `/packages/utils/`           |    36       |         |
+| All files in `/xtask/`                    |    147      |         |
 
 ### Files out of scope
-Any files not in Scope are Out of Scope.
+No files in this repo are out of scope.
 
 
 ## Scoping Q &amp; A
