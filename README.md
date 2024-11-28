@@ -1,5 +1,5 @@
 
-# MANTRA audit details
+# MANTRA DEX audit details
 - Total Prize Pool: $60,000 in USDC
   - HM awards: $47,800 in USDC
   - QA awards: $2,000 in USDC
