@@ -15,7 +15,7 @@ pub(crate) fn query_current_epoch(deps: Deps, env: Env) -> Result<EpochResponse,
     let config = CONFIG.load(deps.storage)?;
 
     ensure!(
-        env.block.time.seconds() >= config.epoch_config.genesis_epoch.u64(),
+        env.block.time.seconds() >= config.epoch_config.genesis_epoch.u64(), //checks if blocktime is greater than the genesis epoch
         ContractError::GenesisEpochHasNotStarted
     );
 
@@ -23,7 +23,7 @@ pub(crate) fn query_current_epoch(deps: Deps, env: Env) -> Result<EpochResponse,
         env.block
             .time
             .minus_seconds(config.epoch_config.genesis_epoch.u64())
-            .seconds(),
+            .seconds(), //subtracts the block.time from genesis  epoch time and sets the current time 
     )
     .checked_div_floor((config.epoch_config.duration.u64(), 1u64))
     .map_err(|e| StdError::generic_err(format!("Error: {:?}", e)))?;
