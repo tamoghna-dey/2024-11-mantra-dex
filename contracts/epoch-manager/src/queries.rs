@@ -22,7 +22,7 @@ pub(crate) fn query_current_epoch(deps: Deps, env: Env) -> Result<EpochResponse,
     let current_epoch = Uint64::new(
         env.block
             .time
-            .minus_seconds(config.epoch_config.genesis_epoch.u64()), @audit why not use checked_sub like in the function below to prevent over/under flow 
+            .minus_seconds(config.epoch_config.genesis_epoch.u64()), // audit why not use checked_sub like in the function below to prevent over/under flow 
             .seconds(), //subtracts the block.time from genesis  epoch time and sets the current time 
     )
     .checked_div_floor((config.epoch_config.duration.u64(), 1u64))
