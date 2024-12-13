@@ -129,7 +129,7 @@ pub fn create_pool(
         .iter()
         .any(|asset| asset_denoms.iter().filter(|&a| a == asset).count() > 1)
     {
-        return Err(ContractError::SameAsset);
+        return Err(ContractError::SameAsset); //what if two assets are same but one is in lowercase n one is in upper
     }
 
     // Verify pool fees
