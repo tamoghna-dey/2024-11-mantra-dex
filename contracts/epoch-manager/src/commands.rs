@@ -12,13 +12,13 @@ pub fn update_config(
     info: &MessageInfo,
     epoch_config: Option<EpochConfig>,
 ) -> Result<Response, ContractError> {
-    cw_ownable::assert_owner(deps.storage, &info.sender)?;
+    cw_ownable::assert_owner(deps.storage, &info.sender)?; //checks if the acc is contract's ownwer or not 
 
     let mut config = CONFIG.load(deps.storage)?;
 
-    if let Some(epoch_config) = epoch_config.clone() {
-        validate_epoch_duration(epoch_config.duration)?;
-        config.epoch_config = epoch_config;
+    if let Some(epoch_config) = epoch_config.clone() {   //if let some checks if the statement return some value it will run otherwise it will get skip 
+        validate_epoch_duration(epoch_config.duration)?; //validates the duration of epoch 
+        config.epoch_config = epoch_config; 
         CONFIG.save(deps.storage, &config)?;
     }
 
