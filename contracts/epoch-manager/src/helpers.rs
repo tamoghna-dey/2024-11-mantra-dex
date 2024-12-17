@@ -8,8 +8,10 @@ pub fn validate_epoch_duration(epoch_duration: Uint64) -> Result<(), ContractErr
         epoch_duration >= Uint64::from(DAY_IN_SECONDS),
         ContractError::InvalidEpochDuration {
             min: DAY_IN_SECONDS
+            //@note minimum epoch duration is one day, if duration is less than one day it reverts
         }
     );
 
     Ok(())
 }
+//checked
